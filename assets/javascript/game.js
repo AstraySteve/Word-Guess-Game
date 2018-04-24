@@ -86,7 +86,7 @@ function isAlpha(keyCode){
     /*Function checks if input (event.keyCode) is AlphaNumeric, returns true or false
     keyCode 48-57 (0-9), 65-90 (A-Z)
     Note: Keyboard input 65-90 (A-Z == a-Z)*/
-    return ((keyCode >= 65 && keyCode <= 90));
+    return ((keyCode >= 65 && keyCode <= 90)||(keyCode >= 97 && keyCode <= 122));
 }
 
 function isInWord(letter){
