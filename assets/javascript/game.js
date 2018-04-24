@@ -12,6 +12,7 @@ var userLoss = document.getElementById("lose");
 var userTries = document.getElementById("tries"); 
 var instructions = document.getElementById("instructions");
 var img = document.getElementById("picture");
+var message = document.getElementById("message");
 
 //Object Class that holds the game core data
 var gameCore = {
@@ -20,7 +21,7 @@ var gameCore = {
     loseCount: 0,
     triesLeft: 10,
     wordList: ['SOLAR SYSTEM', 'MERCURY', 'VENUS', 'EARTH', 'MARS', 'JUPITER', 'NEPTUNE', 'MOON' , 'BLACK HOLE', 'NASA'], //List of words for game
-    imgList: ['Solar-System.jpg', 'Mercury.jpg', 'Venus.jpg', 'Earth.jpg', 'Mars.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg'],
+    imgList: ['Solar-System.jpg', 'Mercury.jpg', 'Venus.jpg', 'Earth.jpg', 'Mars.jpg', 'Jupiter.jpg', 'Neptune.jpg', 'FullMoon.jpg', 'blackhole.jpg', 'NASA.jpg'], //List image reference
     answers: "",
     imageSrc: "",
     displayWord: [], //Empty list to display word as '_' and to compare with answers
@@ -43,7 +44,8 @@ var gameCore = {
         //console.log(this.answers); //DEBUG CODE/ GAME CHEAT REMOVE WHEN DONE
         this.displayWordBlank();
 
-        userGuess.textContent = "You Guessed: ";//TODO fix after HTML 
+        message.textContent = "Look to the stars.";
+        userGuess.textContent = "You Guessed: ";
         userTries.textContent = this.triesLeft;
     },
 
@@ -143,6 +145,7 @@ document.onkeyup = function(event){
                     //this is here so user can see the final word
                     gameCore.winCount++;
                     userWins.textContent = gameCore.winCount;
+                    message.textContent = "You Got it !";
                     instructions.textContent = "Enter any key to continue";
                     img.src = "assets/images/" + gameCore.imageSrc;
                 }
@@ -150,6 +153,11 @@ document.onkeyup = function(event){
             else if ((gameCore.wrongGuess.indexOf(inputUpper)==-1) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 2);
                 gameCore.triesLeft--;
+
+                if(gameCore.triesLeft == 0){
+                    instructions.textContent = "Enter any key to continue";
+                    message.textContent = "The Answer was: " + gameCore.answers;
+                }
 
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");

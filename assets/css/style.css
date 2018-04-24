@@ -13,6 +13,15 @@ html, body{
     padding: 0;
     line-height: 1.6;
     font-family: 'Gugi', cursive;
+
+    /*Properties for sticky footer, flexbox for variable height*/
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container{
+    flex: 1;
 }
 
 header{
@@ -25,22 +34,54 @@ footer{
     background-color: black;
     color: #ffffff;
     padding: 20px 0 10px;
-    margin-top: 30px;
+    margin-top: 20px;
+    border-top: 1px solid steelblue;
+    font-size: 10px;
 }
+
+img{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
 /*id CSS*/
 #main-header{
     background-color: black;
     width: 100%;
     padding: 2% 0;
     margin-bottom: 5%;
+    border-bottom: 1px solid steelblue;
 }
 
-/*Temp CSS*/
-#test-section{
+#img-container{
+    border: 2px solid white;
+    background-color: steelblue;
+    padding: 5px;
+    min-height: 20px;
+}
+
+#section-block{
     border: 2px solid white;
     text-align: center;
 }
 
-#test-aside{
+#aside-block{
     border: 2px solid white;
+}
+
+/*media queries*/
+@media only screen and (max-width:667px){
+    h3, p{
+        font-size: 15px;
+    }
+    #main-header{
+        font-size: 15px;
+    }
+    h1{
+        font-size: 30px;
+    }
+    h2{
+        font-size: 20px;
+    }
 }
