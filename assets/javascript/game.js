@@ -13,6 +13,7 @@ var userTries = document.getElementById("tries");
 var instructions = document.getElementById("instructions");
 var img = document.getElementById("picture");
 var message = document.getElementById("message");
+var inputField = document.getElementById("textInput");
 
 //Object Class that holds the game core data
 var gameCore = {
@@ -47,6 +48,7 @@ var gameCore = {
         message.textContent = "Look to the stars.";
         userGuess.textContent = "You Guessed: ";
         userTries.textContent = this.triesLeft;
+        inputField.value = "";
     },
 
     pastGuess: function(letter, state) {
@@ -139,6 +141,7 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
+                inputField.value = "";
 
                 if(checkAnswer()){
                     //User Win Condition, 
@@ -162,6 +165,7 @@ document.onkeyup = function(event){
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
+                inputField.value = "";
             }
         }
         else{
