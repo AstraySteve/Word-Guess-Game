@@ -7,11 +7,11 @@
 //HTML hookup variables
 var userGuess = document.getElementById("userGuess"); //TODO link to show past wrong guess
 var userAnswer = document.getElementById("userAnswer"); //TODO link to show users right guesses
-var userWins = document.getElementById("win"); //TODO link to show users right guesses
-var userLoss = document.getElementById("lose"); //TODO link to show users right guesses
-var userTries = document.getElementById("tries"); //TODO link to show users right guesses
-var tempStart = document.getElementById("start");
-
+var userWins = document.getElementById("win"); 
+var userLoss = document.getElementById("lose"); 
+var userTries = document.getElementById("tries"); 
+var instructions = document.getElementById("instructions");
+var img = document.getElementById("picture");
 
 //Object Class that holds the game core data
 var gameCore = {
@@ -19,9 +19,11 @@ var gameCore = {
     winCount: 0,
     loseCount: 0,
     triesLeft: 10,
-    wordList: ['TEST!','WORD!','HELLO WORLD'], //List of words for game
+    wordList: ['SOLAR SYSTEM', 'MERCURY', 'VENUS', 'EARTH', 'MARS', 'JUPITER', 'NEPTUNE', 'MOON' , 'BLACK HOLE', 'NASA'], //List of words for game
+    imgList: ['Solar-System.jpg', 'Mercury.jpg', 'Venus.jpg', 'Earth.jpg', 'Mars.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg', 'FullMoon.jpg'],
     answers: "",
-    displayWord: [], //Empty list to display word as '_'
+    imageSrc: "",
+    displayWord: [], //Empty list to display word as '_' and to compare with answers
     wrongGuess: [], //Empty list to hold letters that the user guessed wrong
     rightGuess: [], //Empty list to hold letters that the user guessed right
 
@@ -35,13 +37,14 @@ var gameCore = {
         this.displayWord = [];
 
         //randomly choose new word from list of game words
-        this.answers = this.wordList[Math.floor(Math.random() * this.wordList.length)];
-        console.log(this.answers); //DEBUG CODE/ GAME CHEAT REMOVE WHEN DONE
+        var ranNum = Math.floor(Math.random() * this.wordList.length)
+        this.answers = this.wordList[ranNum];
+        this.imageSrc = this.imgList[ranNum];
+        //console.log(this.answers); //DEBUG CODE/ GAME CHEAT REMOVE WHEN DONE
         this.displayWordBlank();
 
-        userGuess.textContent = "guess";
+        userGuess.textContent = "You Guessed: ";//TODO fix after HTML 
         userTries.textContent = this.triesLeft;
-
     },
 
     pastGuess: function(letter, state) {
@@ -76,9 +79,9 @@ var gameCore = {
 
 //Functions
 function isAlpha(keyCode){
-    //Function checks if input (event.keyCode) is AlphaNumeric, returns true or false
-    //keyCode 48-57 (0-9), 65-90 (A-Z)
-    //Note: Keyboard input 65-90 (A-Z == a-Z)
+    /*Function checks if input (event.keyCode) is AlphaNumeric, returns true or false
+    keyCode 48-57 (0-9), 65-90 (A-Z)
+    Note: Keyboard input 65-90 (A-Z == a-Z)*/
     return ((keyCode >= 65 && keyCode <= 90));
 }
 
@@ -88,7 +91,7 @@ function isInWord(letter){
 }
 
 function replaceBlank(letter){
-    //replace '_ ' with the correct letter according to answers
+    //replace '_ ' with the correct letter according to answers and display them
     for (i=0; i<gameCore.displayWord.length; i++){
         if (letter == gameCore.answers[i]){
             gameCore.displayWord[i] = letter;
@@ -102,6 +105,7 @@ function replaceBlank(letter){
 
 function checkAnswer(){
     //Checks if the user got the whole word
+    //returns true if match, false otherwise
     var inputWord = "";
     for (i=0; i<gameCore.displayWord.length; i++){
         inputWord += gameCore.displayWord[i];
@@ -115,14 +119,13 @@ document.onkeyup = function(event){
     if (gameCore.gameStart == false){
         //Game hasn't started, 'press anykey event' flag
         gameCore.gameStart = true;
-        tempStart.textContent = "Please enter Letters or Numbers"; //TODO TEMPS
-
+        instructions.textContent = "Please enter a letter";
         gameCore.gameReset();
-
     }
     else if(checkAnswer()){
+        //User Wins
         gameCore.gameReset();
-        tempStart.textContent = "Please enter Letters or Numbers"; //TODO TEMPS
+        instructions.textContent = "Please enter a letter";
     }
     else if (gameCore.triesLeft > 0){
         //Round is not over
@@ -136,10 +139,12 @@ document.onkeyup = function(event){
                 replaceBlank(inputUpper);
 
                 if(checkAnswer()){
-                    //User Win Condition
+                    //User Win Condition, 
+                    //this is here so user can see the final word
                     gameCore.winCount++;
                     userWins.textContent = gameCore.winCount;
-                    tempStart.textContent = "Press Any Key To Continue"; //TODO TEMPS
+                    instructions.textContent = "Enter any key to continue";
+                    img.src = "assets/images/" + gameCore.imageSrc;
                 }
             }
             else if ((gameCore.wrongGuess.indexOf(inputUpper)==-1) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
@@ -147,14 +152,9 @@ document.onkeyup = function(event){
                 gameCore.triesLeft--;
 
                 //Link values to HTML
-                userGuess.textContent += inputUpper;
+                userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
             }
-
-            //DEBUG CODE REMOVE WHEN DONE
-            //console.log("right " + gameCore.rightGuess);
-            //console.log("wrong " +gameCore.wrongGuess);
-            //console.log(gameCore.triesLeft);
         }
         else{
             //Invalid Input
@@ -168,5 +168,4 @@ document.onkeyup = function(event){
         gameCore.loseCount++;
         userLoss.textContent = gameCore.loseCount;
     }
-    
 }

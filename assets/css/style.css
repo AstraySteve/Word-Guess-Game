@@ -1,0 +1,46 @@
+/*
+    Steven Tran
+    Assignment 3, 2018
+    UofT SCS Coding Bootcamp
+*/
+
+/*Element CSS*/
+html, body{
+    background-image: url("../images/Background/starry_night_sky.jpg");
+    background-color: black;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-family: 'Gugi', cursive;
+}
+
+header{
+    text-align: center;
+    color: #ffffff;
+}
+
+footer{
+    text-align: center;
+    background-color: black;
+    color: #ffffff;
+    padding: 20px 0 10px;
+    margin-top: 30px;
+}
+/*id CSS*/
+#main-header{
+    background-color: black;
+    width: 100%;
+    padding: 2% 0;
+    margin-bottom: 5%;
+}
+
+/*Temp CSS*/
+#test-section{
+    border: 2px solid white;
+    text-align: center;
+}
+
+#test-aside{
+    border: 2px solid white;
+}
