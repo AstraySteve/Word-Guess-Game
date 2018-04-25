@@ -122,10 +122,10 @@ function checkAnswer(){
 document.onkeyup = function(event){
     if (gameCore.gameStart == false){
         //Game hasn't started, 'press anykey event' flag
+        inputField.value = ""; //Redundant code to ensure field is blank
         gameCore.gameStart = true;
         instructions.textContent = "Please enter a letter";
         gameCore.gameReset();
-        inputField.value = "";
     }
     else if(checkAnswer()){
         //User Wins
@@ -140,7 +140,6 @@ document.onkeyup = function(event){
             userInput = inputField.value;
             inputCode = userInput.charCodeAt(0);
             inputField.value = ""; //reset input box
-            alert(inputField.value);
         }
         else{
             userInput = event.key;
@@ -154,7 +153,7 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
-                inputField.value = "";
+                inputField.value = ""; //Redundant code to ensure field is blank
 
                 if(checkAnswer()){
                     //User Win Condition, 
@@ -178,7 +177,7 @@ document.onkeyup = function(event){
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
-                inputField.value = "";
+                inputField.value = ""; //Redundant code to ensure field is blank
             }
         }
         else{
