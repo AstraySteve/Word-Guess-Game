@@ -140,6 +140,7 @@ document.onkeyup = function(event){
             userInput = inputField.value;
             inputCode = userInput.charCodeAt(0);
             inputField.value = ""; //reset input box
+            alert(inputField.value);
         }
         else{
             userInput = event.key;
