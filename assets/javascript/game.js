@@ -143,6 +143,7 @@ document.onkeyup = function(event){
         else{
             userInput = event.key;
             inputCode = event.keyCode;
+            alert("code did not run");
         }
         //var userInput = event.key;
         //Check for valid input
