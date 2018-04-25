@@ -133,9 +133,19 @@ document.onkeyup = function(event){
     }
     else if (gameCore.triesLeft > 0){
         //Round is not over
-        var userInput = event.key;
+        var userInput;
+        var inputCode;
+        if (inputField.value!=""){
+            userInput = inputField.value;
+            inputCode = useInput.charCodeAt(0)
+        }
+        else{
+            userInput = event.key;
+            inputCode = event.keyCode;
+        }
+        //var userInput = event.key;
         //Check for valid input
-        if(isAlpha(event.keyCode)){
+        if(isAlpha(inputCode)){
             var inputUpper = userInput.toUpperCase();
             //Valid Input, Start Comparing, ignore cases of repeted letter guess
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
