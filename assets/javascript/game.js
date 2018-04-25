@@ -48,7 +48,7 @@ var gameCore = {
         message.textContent = "Look to the stars.";
         userGuess.textContent = "You Guessed: ";
         userTries.textContent = this.triesLeft;
-        inputField.value = "";
+        inputField.value = ""; //make sure field is blank upon reset
     },
 
     pastGuess: function(letter, state) {
@@ -138,12 +138,11 @@ document.onkeyup = function(event){
         if (inputField.value!=""){
             userInput = inputField.value;
             inputCode = userInput.charCodeAt(0);
-            alert("code ran");
+            inputField.value = ""; //reset input box
         }
         else{
             userInput = event.key;
             inputCode = event.keyCode;
-            alert("code did not run");
         }
         //var userInput = event.key;
         //Check for valid input
@@ -153,7 +152,6 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
-                inputField.value = "";
 
                 if(checkAnswer()){
                     //User Win Condition, 
@@ -177,7 +175,6 @@ document.onkeyup = function(event){
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
-                inputField.value = "";
             }
         }
         else{
