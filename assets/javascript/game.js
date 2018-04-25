@@ -125,6 +125,7 @@ document.onkeyup = function(event){
         gameCore.gameStart = true;
         instructions.textContent = "Please enter a letter";
         gameCore.gameReset();
+        inputField.value = "";
     }
     else if(checkAnswer()){
         //User Wins
@@ -153,7 +154,7 @@ document.onkeyup = function(event){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
                 inputField.value = "";
-                
+
                 if(checkAnswer()){
                     //User Win Condition, 
                     //this is here so user can see the final word
