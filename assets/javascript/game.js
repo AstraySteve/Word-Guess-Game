@@ -152,7 +152,8 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
-
+                inputField.value = "";
+                
                 if(checkAnswer()){
                     //User Win Condition, 
                     //this is here so user can see the final word
@@ -175,6 +176,7 @@ document.onkeyup = function(event){
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
+                inputField.value = "";
             }
         }
         else{
