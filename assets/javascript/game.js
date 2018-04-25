@@ -48,7 +48,7 @@ var gameCore = {
         message.textContent = "Look to the stars.";
         userGuess.textContent = "You Guessed: ";
         userTries.textContent = this.triesLeft;
-        inputField.textContent = ""; //make sure field is blank upon reset
+        inputField.value = ""; //make sure field is blank upon reset
     },
 
     pastGuess: function(letter, state) {
@@ -136,16 +136,15 @@ document.onkeyup = function(event){
         //Round is not over
         var userInput;
         var inputCode;
-        if (inputField.textContent!=""){
-            userInput = inputField.textContent;
+        if (inputField.value!=""){
+            userInput = inputField.value;
             inputCode = userInput.charCodeAt(0);
+            inputField.value = ""; //reset input box
         }
         else{
             userInput = event.key;
             inputCode = event.keyCode;
         }
-        inputField.textContent = ""; //reset input box
-        inputField.value = "";
         //var userInput = event.key;
         //Check for valid input
         if(isAlpha(inputCode)){
@@ -154,6 +153,7 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (gameCore.rightGuess.indexOf(inputUpper)==-1)){
                 gameCore.pastGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
+                inputField.value = ""; //Redundant code to ensure field is blank
 
                 if(checkAnswer()){
                     //User Win Condition, 
@@ -177,12 +177,12 @@ document.onkeyup = function(event){
                 //Link values to HTML
                 userGuess.textContent += (inputUpper + "\xa0");
                 userTries.textContent = gameCore.triesLeft;
+                inputField.value = ""; //Redundant code to ensure field is blank
             }
         }
         else{
             //Invalid Input
             alert("Please press only letters!");
-            inputField.textContent = "";
             inputField.value = "";
         }
 
