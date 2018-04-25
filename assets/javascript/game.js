@@ -137,7 +137,8 @@ document.onkeyup = function(event){
         var inputCode;
         if (inputField.value!=""){
             userInput = inputField.value;
-            inputCode = useInput.charCodeAt(0)
+            inputCode = userInput.charCodeAt(0);
+            alert("code ran");
         }
         else{
             userInput = event.key;
