@@ -170,7 +170,8 @@ document.onkeyup = function(event){
         }
         else{
             //Invalid Input
-            alert("Please press only letters!" + " keyCode" + event.keyCode + " input " + userInput );
+            alert("Please press only letters!");
+            inputField.value = "";
         }
 
     }
